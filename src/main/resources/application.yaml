@@ -8,5 +8,5 @@ camunda.bpm.admin-user:
   id: admin
   password: admin
 
-#kafka:
-#  bootstrapAddress: 'localhost:9092'
+kafka:
+  bootstrapAddress: 'localhost:9092'

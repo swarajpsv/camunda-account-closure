@@ -5,6 +5,7 @@ import com.example.workflow.services.CamundaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,9 +26,4 @@ public class ClosureController {
         return "Process Started";
     }
 
-    @PostMapping(value = "/receiveSignal")
-    public String receiveSignal() {
-        camundaService.broadcastSignal("taxCalculated");
-        return "Signal Received";
-    }
 }

@@ -2,11 +2,13 @@ package com.example.workflow.services;
 
 import com.example.workflow.models.AccountHolder;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.Execution;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -32,8 +34,11 @@ public class CamundaService {
         runtimeService.startProcessInstanceByKey("kafkaCheck", variables);
     }
 
-    public void broadcastSignal(String signal) {
-        System.out.println("Tax Received from Tax Entity! Broadcasting a signal...");
-        runtimeService.signalEventReceived(signal);
+    public void registerTax(String processKey, String tax) {
+        System.out.println("Generating the signal to proceed...");
+        List<Execution> processes = runtimeService.createExecutionQuery().processDefinitionKey(processKey).list();
+        Execution execution = processes.get(0);
+        runtimeService.setVariable(execution.getId(), "tax", tax);
+        runtimeService.signalEventReceived("taxCalculated");
     }
 }

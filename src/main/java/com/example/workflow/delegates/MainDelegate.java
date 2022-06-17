@@ -9,6 +9,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.json.JSONObject;
 
@@ -16,17 +18,18 @@ import java.io.IOException;
 
 @Component
 public class MainDelegate {
-//
-//    @Autowired
-//    KafkaTemplate<String, String> kafkaTemplate;
-//
-//    public void publishTaxMsg(DelegateExecution execution) {
-//        System.out.println("About to publish a message to Tax Calculation Topic...");
-//        kafkaTemplate.send("experiment", "Amount = 10000");
-//    }
+
+    @Autowired
+    KafkaTemplate<String, String> kafkaTemplate;
+
+    public void publishTaxMsg(DelegateExecution execution) {
+        System.out.println("About to publish a message to Tax Calculation Topic...");
+        kafkaTemplate.send("experiment", String.valueOf(execution.getVariable("balance")));
+    }
 
     public void computeKafkaAmount(DelegateExecution execution) {
-        System.out.println("Tax Calculated! Closing Account...");
+        System.out.println("Computing Net Amount...");
+        System.out.println(String.format("\nInterest: %s\nTax: %s", execution.getVariable("interest"), execution.getVariable("tax")));
     }
 
     public void computeFees(DelegateExecution execution) throws IOException {

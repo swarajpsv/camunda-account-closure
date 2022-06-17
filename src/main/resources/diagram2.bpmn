@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1jr4l7l" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1jr4l7l" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
   <bpmn:process id="accountClosure" name="AccountClosure" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="Closure Request" camunda:asyncBefore="true">
       <bpmn:outgoing>Flow_0tcbpu1</bpmn:outgoing>
@@ -28,7 +28,7 @@
       <bpmn:outgoing>Flow_0i0kqnh</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_13lufa9" name="Compute Tax" camunda:expression="${mainDelegate.computeTax(execution)}">
-      <bpmn:incoming>Flow_0bznew6</bpmn:incoming>
+      <bpmn:incoming>Flow_0i0kqnh</bpmn:incoming>
       <bpmn:outgoing>Flow_0uzh9w5</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0uzh9w5" sourceRef="Activity_13lufa9" targetRef="Activity_07c7mh8" />
@@ -41,15 +41,7 @@
       <bpmn:outgoing>Flow_1vlqnaz</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0iiim95" sourceRef="Activity_1g7zid3" targetRef="Activity_0vk6m2l" />
-    <bpmn:intermediateCatchEvent id="Event_1yrhfo3">
-      <bpmn:incoming>Flow_0i0kqnh</bpmn:incoming>
-      <bpmn:outgoing>Flow_0bznew6</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_1seopas">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT60S</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="Flow_0i0kqnh" sourceRef="Activity_0vk6m2l" targetRef="Event_1yrhfo3" />
-    <bpmn:sequenceFlow id="Flow_0bznew6" sourceRef="Event_1yrhfo3" targetRef="Activity_13lufa9" />
+    <bpmn:sequenceFlow id="Flow_0i0kqnh" sourceRef="Activity_0vk6m2l" targetRef="Activity_13lufa9" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="accountClosure">
@@ -58,31 +50,21 @@
         <di:waypoint x="912" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0uzh9w5_di" bpmnElement="Flow_0uzh9w5">
-        <di:waypoint x="690" y="117" />
+        <di:waypoint x="670" y="117" />
         <di:waypoint x="750" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0tcbpu1_di" bpmnElement="Flow_0tcbpu1">
-        <di:waypoint x="160" y="99" />
-        <di:waypoint x="160" y="57" />
-        <di:waypoint x="280" y="57" />
-        <di:waypoint x="280" y="77" />
+        <di:waypoint x="178" y="117" />
+        <di:waypoint x="230" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0iiim95_di" bpmnElement="Flow_0iiim95">
         <di:waypoint x="330" y="117" />
-        <di:waypoint x="360" y="117" />
+        <di:waypoint x="390" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0i0kqnh_di" bpmnElement="Flow_0i0kqnh">
-        <di:waypoint x="460" y="117" />
-        <di:waypoint x="502" y="117" />
+        <di:waypoint x="490" y="117" />
+        <di:waypoint x="570" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0bznew6_di" bpmnElement="Flow_0bznew6">
-        <di:waypoint x="538" y="117" />
-        <di:waypoint x="590" y="117" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_1di13yu_di" bpmnElement="Activity_13lufa9">
-        <dc:Bounds x="590" y="77" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_06x9an8_di" bpmnElement="Event_06x9an8">
         <dc:Bounds x="912" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -100,11 +82,12 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_12gqwc7_di" bpmnElement="Activity_0vk6m2l">
-        <dc:Bounds x="360" y="77" width="100" height="80" />
+        <dc:Bounds x="390" y="77" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0zg9e6g_di" bpmnElement="Event_1yrhfo3">
-        <dc:Bounds x="502" y="99" width="36" height="36" />
+      <bpmndi:BPMNShape id="Activity_1di13yu_di" bpmnElement="Activity_13lufa9">
+        <dc:Bounds x="570" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
